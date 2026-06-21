@@ -35,3 +35,17 @@ def test_LittleItems():
     cost = Delivery.calculate(order,delivery_distance)
   #Assert
     assert cost == 2.5
+
+
+def test_small_order_short_distance():
+    #Arrange
+    order = MockSet()
+    order.add(MockModel(quantity=3))
+    order.add(MockModel(quantity=1))
+    del_dist = 2
+
+    #Act
+    cost = Delivery.calculate(order, del_dist)
+
+    #Assert
+    assert cost == 2.50
