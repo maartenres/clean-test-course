@@ -5,7 +5,16 @@ on:
     branches:
       - lesson-5
 jobs:
+  security_test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    name: Execute the PyCharm security test
+    steps:
+      - uses: actions/checkout@v4
   build_and_test:
+    needs: [security_test]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -22,7 +31,7 @@ jobs:
           pip install pytest django_mock_queries six coverage
       - name: Unit Tests
         run: |
-          coverage run -m --source=./hangry_api pytest
+          coverage run --source=./hangry_api -m pytest
           coverage report
   deploy:
     needs: [build_and_test]
