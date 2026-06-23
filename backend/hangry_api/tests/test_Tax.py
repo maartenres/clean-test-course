@@ -1,5 +1,4 @@
 from api.controllers import Tax
-from django_mock_queries.query import MockSet, MockModel
 
 def test_SimpleTax():
   #Arrange
